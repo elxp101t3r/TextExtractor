@@ -14,8 +14,17 @@ Window.size= (500, 500)
 
 class ExtractingTextApp(MDApp):
     def extract_text(self, event):
-        pass
-    
+        self.path_to_tessaract = r'/usr/bin/tesseract'
+        path_to_image = self.image_file
+        
+        pytesseract.tesseract_cmd = self.path_to_tessaract
+        
+        img = Image.open(path_to_image)
+        
+        text = pytesseract.image_to_string(img)
+        
+        print(text)
+        self.imageText.text = text
     
     def fileChooser(self, event):
         self.file = askopenfile(mode='r', filetypes=[('png files', '*.png')])
