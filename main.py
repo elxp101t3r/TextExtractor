@@ -1,3 +1,4 @@
+from tkinter.filedialog import askopenfile
 from kivymd.app import MDApp
 from kivymd.uix.relativelayout import MDRelativeLayout
 from kivy.uix.button import Button
@@ -12,13 +13,20 @@ Window.size= (500, 500)
 
 
 class ExtractingTextApp(MDApp):
-    def fileChooser(self, event):
-        pass
-    
-    
     def extract_text(self, event):
         pass
     
+    
+    def fileChooser(self, event):
+        self.file = askopenfile(mode='r', filetypes=[('png files', '*.png')])
+        self.image_file = self.file.name
+        
+        self.locationLabel.text = self.image_file
+        self.locationLabel.pos_hint = {'center_x': .5, 'center_y': .2}
+        self.extract_text_button.disabled = False
+        self.choose_button.disabled = True
+    
+   
     
     def build(self):
         
